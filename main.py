@@ -9,16 +9,27 @@ app = FastAPI()
 
 
 @app.get("/")
-def get_prime_number(number: int):
-    return {
-        "number": number,
-        "is_prime": prime_number(number),
-    }
-
-
-
-
-
+def get_prime_number(number):
+    try:
+        return {
+            "number": number,
+            "is_prime": prime_number(number),
+        }
+    except TypeError as e:
+        print(e)
+        print(str(e))
+        print(type(e))
+        return {
+            "number": number,
+            "error": str(e),
+            "ASDFAS": 9999
+        }
+    except ValueError as e:
+        return {
+            "number": number,
+            "error": e,
+            "ASDFAS": 123121
+        }
 
 
 """ devolver estructura
@@ -28,5 +39,5 @@ esprimo = true/false
 }
 """
 
-if __name__=="__main__":
-    uvicorn.run("main:app",port=8000,reload=True)
+if __name__ == "__main__":
+    uvicorn.run("main:app", port=8000, reload=True)
