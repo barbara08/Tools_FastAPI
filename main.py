@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 
-from myfunctions import prime_number
+from myfunctions import prime_number, generate_password, decimal_to_binary
 
 app = FastAPI()
 
@@ -18,6 +18,18 @@ def get_prime_number(number: int):
     except TypeError as e:
         return {
             "number": number,
+            "error": str(e),
+        }
+
+
+@app.get("/generate_password")
+def get_generate_password(leng: int):
+    try:
+        return {
+            "password": generate_password(leng),
+        }
+    except ValueError as e:
+        return {
             "error": str(e),
         }
 

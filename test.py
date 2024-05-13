@@ -1,7 +1,8 @@
-# from myfunctions import numero_primo
 import unittest
 
-from myfunctions import prime_number, prime_number_v0
+from myfunctions import prime_number, prime_number_v0, generate_password, decimal_to_binary
+
+# 1. TEST PARA NÚMERO PRIMOS
 
 
 class TestPrimeNumber(unittest.TestCase):
@@ -43,6 +44,40 @@ class TestPrimeNumber(unittest.TestCase):
 # Syntax:
     # with self.assertRaises(TypeError):
     # prime_number_v0(23.01)
+
+
+# 2. TEST PARA GENERAR PASSWORD ALEATORIOS
+
+class TestRandomPassWord(unittest.TestCase):
+
+    def test_is_generate(self):
+        self.assertEqual(len(generate_password(8)), 8)
+
+    def test_is_generate_2(self):
+        self.assertEqual(len(generate_password(16)), 16)
+
+    def test_is_generate_3(self):
+        self.assertEqual(len(generate_password(12)), 12)
+
+    def test_is_not_generate(self):
+        # self.assertRaises(ValueError, "generate_password", [17])  # DE ESTA FORMA NO SALE, SALE CON WITH
+        with self.assertRaises(ValueError):
+            generate_password(17)
+
+    def test_is_not_generate_2(self):
+        with self.assertRaises(ValueError):
+            generate_password(7)
+
+
+# 3. TEST PARA PASAR DECIMAL A BINARIO
+
+class TestDecimal_to_binary(unittest.TestCase):
+    def test_decimal_to_binary(self):
+        self.assertEqual(decimal_to_binary(10), "1010")
+
+    def test_decimal_to_binary_2(self):
+        self.assertEqual(decimal_to_binary(15), "1111")
+
 
 if __name__ == '__main__':
     unittest.main()
