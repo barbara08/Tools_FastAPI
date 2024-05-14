@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 
-from myfunctions import prime_number, generate_password, decimal_to_binary
+from myfunctions import prime_number, generate_password, decimal_to_binary, binary_to_decimal
 
 app = FastAPI()
 
@@ -29,6 +29,32 @@ def get_generate_password(leng: int):
             "password": generate_password(leng),
         }
     except ValueError as e:
+        return {
+            "error": str(e),
+        }
+
+
+@app.get("/decimal_to_binary")
+def get_decimal_to_binary(decimal: int):
+    try:
+        return {
+            "decimal": decimal,
+            "binary": decimal_to_binary(decimal),
+        }
+    except TypeError as e:
+        return {
+            "error": str(e),
+        }
+
+
+@app.get("/binary_to_decimal")
+def get_binary_to_decimal(binary: int):
+    try:
+        return {
+            "binary": binary,
+            "decimal": binary_to_decimal(binary),
+        }
+    except TypeError as e:
         return {
             "error": str(e),
         }

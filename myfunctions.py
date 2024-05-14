@@ -63,23 +63,44 @@ def generate_password(leng: int) -> str:
         # print("Su password es de longitud => ", le)
         return concat_psw
     else:
-        raise ValueError("Longitud del password debe estar entre 8 y 16")
+        raise ValueError("Password length must be between 8 and 16")
 
 # 3. PASAR NÚMERO DECIMAL A BINARIO
+# contemplar el 0
 
 
-def decimal_to_binary(decimal: int) -> int:
+def decimal_to_binary(decimal: int) -> str:
+    print(decimal, "-ª", isinstance(decimal, int))
+    # if decimal < 0:
+    #   raise TypeError("Is not positive")
+    if not isinstance(decimal, int):
+        raise TypeError("Is not a integer")
+    if decimal == 0:
+        return "0"
     rest = []
     while decimal > 0:
         rest.append(decimal % 2)
         decimal = int(decimal/2)
-        print("resto", rest)
-        print("nuevo decimal", decimal)
+        #  print("resto", rest)
+        #  print("nuevo decimal", decimal)
     rest.reverse()
     str_rest = [str(i) for i in rest]
     concat_rest = "".join(str_rest)
     return concat_rest
 
+# 4. PASAR NÚMERO BINARIO A DECIMAL
 
-print("binary", decimal_to_binary(10))
-print("binary", decimal_to_binary(15))
+
+def binary_to_decimal(binary: int) -> int:
+    decimal, i = 0, 0
+    while (binary != 0):
+        dec = binary % 10
+        decimal = decimal + dec * pow(2, i)
+        binary = binary//10
+        i += 1
+    return decimal
+
+
+# print("decimal", binary_to_decimal(100))
+# print("decimal", binary_to_decimal(1010))
+print("binary", decimal_to_binary(-7))

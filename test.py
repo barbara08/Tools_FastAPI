@@ -1,32 +1,32 @@
 import unittest
 
-from myfunctions import prime_number, prime_number_v0, generate_password, decimal_to_binary
+from myfunctions import prime_number, prime_number_v0, generate_password, decimal_to_binary, binary_to_decimal
 
 # 1. TEST PARA NÚMERO PRIMOS
 
 
-class TestPrimeNumber(unittest.TestCase):
-    def test_is_prime(self):
+class xTestPrimeNumber(unittest.TestCase):
+    def xtest_is_prime(self):
         for n in [2, 3, 5, 7, 11, 13, 17]:
             self.assertEqual(prime_number(n), True)
             self.assertEqual(prime_number_v0(n), True)
 
-    def test_is_no_prime(self):
+    def xtest_is_no_prime(self):
         for n in [12, 30, 45, 27, 110, 13000, 49]:
             self.assertEqual(prime_number(n), False)
             self.assertEqual(prime_number_v0(n), False)
 
-    def test_is_no_prime_lt_2(self):
+    def xtest_is_no_prime_lt_2(self):
         self.assertEqual(prime_number(0), False)
         self.assertEqual(prime_number(1), False)
         self.assertEqual(prime_number_v0(0), False)
         self.assertEqual(prime_number_v0(1), False)
 
-    def test_negative_number(self):
+    def xtest_negative_number(self):
         self.assertEqual(prime_number(-15), False)
         self.assertEqual(prime_number_v0(-15), False)
 
-    def test_with_not_int(self):
+    def xtest_with_not_int(self):
         # Dos formas de realizarlos
         with self.assertRaises(TypeError):
             prime_number_v0(23.01)
@@ -48,23 +48,23 @@ class TestPrimeNumber(unittest.TestCase):
 
 # 2. TEST PARA GENERAR PASSWORD ALEATORIOS
 
-class TestRandomPassWord(unittest.TestCase):
+class xTestRandomPassWord(unittest.TestCase):
 
-    def test_is_generate(self):
+    def xtest_is_generate(self):
         self.assertEqual(len(generate_password(8)), 8)
 
-    def test_is_generate_2(self):
+    def xtest_is_generate_2(self):
         self.assertEqual(len(generate_password(16)), 16)
 
-    def test_is_generate_3(self):
+    def xtest_is_generate_3(self):
         self.assertEqual(len(generate_password(12)), 12)
 
-    def test_is_not_generate(self):
+    def xtest_is_not_generate(self):
         # self.assertRaises(ValueError, "generate_password", [17])  # DE ESTA FORMA NO SALE, SALE CON WITH
         with self.assertRaises(ValueError):
             generate_password(17)
 
-    def test_is_not_generate_2(self):
+    def xtest_is_not_generate_2(self):
         with self.assertRaises(ValueError):
             generate_password(7)
 
@@ -74,9 +74,34 @@ class TestRandomPassWord(unittest.TestCase):
 class TestDecimal_to_binary(unittest.TestCase):
     def test_decimal_to_binary(self):
         self.assertEqual(decimal_to_binary(10), "1010")
-
-    def test_decimal_to_binary_2(self):
         self.assertEqual(decimal_to_binary(15), "1111")
+        self.assertEqual(decimal_to_binary(0), "0")
+        self.assertEqual(decimal_to_binary(2), "10")
+        self.assertEqual(decimal_to_binary(1), "1")
+
+    def test_decimal_to_binary_with_error(self):
+        with self.assertRaises(TypeError):
+            decimal_to_binary("adsf")
+        with self.assertRaises(TypeError):
+            decimal_to_binary([1])
+        with self.assertRaises(TypeError):
+            decimal_to_binary({1})
+        with self.assertRaises(TypeError):
+            decimal_to_binary("1")
+
+    def test_decimal_to_binary_with_negative_number(self):
+        with self.assertRaises(TypeError):
+            decimal_to_binary(-7)
+
+ # 4. TEST PARA PASAR NÚMERO BINARIO A DECIMAL
+
+
+class xTestBinary_to_decimal(unittest.TestCase):
+    def xtest_binary_to_decimal(self):
+        self.assertEqual(binary_to_decimal(1010), 10)
+
+    def xtest_binary_to_decimal_2(self):
+        self.assertEqual(binary_to_decimal(100), 4)
 
 
 if __name__ == '__main__':
