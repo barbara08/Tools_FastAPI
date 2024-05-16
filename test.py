@@ -36,16 +36,6 @@ class xTestPrimeNumber(unittest.TestCase):
         self.assertRaises(TypeError, 'prime_number', [23, 6])
 
 
-# Syntax: assertEqual(firstValue, secondValue, message)
-
-# Dos formas con asssetRaises
-# Syntax:
-    # assertRaises(TypeError, 'prime_number_v0', (1, 2, 3))
-# Syntax:
-    # with self.assertRaises(TypeError):
-    # prime_number_v0(23.01)
-
-
 # 2. TEST PARA GENERAR PASSWORD ALEATORIOS
 
 class xTestRandomPassWord(unittest.TestCase):
@@ -90,18 +80,26 @@ class TestDecimal_to_binary(unittest.TestCase):
             decimal_to_binary("1")
 
     def test_decimal_to_binary_with_negative_number(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             decimal_to_binary(-7)
 
- # 4. TEST PARA PASAR NÚMERO BINARIO A DECIMAL
+# 4. TEST PARA PASAR NÚMERO BINARIO A DECIMAL
 
 
-class xTestBinary_to_decimal(unittest.TestCase):
-    def xtest_binary_to_decimal(self):
+class TestBinary_to_decimal(unittest.TestCase):
+    def test_binary_to_decimal(self):
         self.assertEqual(binary_to_decimal(1010), 10)
-
-    def xtest_binary_to_decimal_2(self):
         self.assertEqual(binary_to_decimal(100), 4)
+
+    def test_binary_to_decimal_with_error(self):
+        with self.assertRaises(ValueError):
+            binary_to_decimal("adsf")
+        with self.assertRaises(ValueError):
+            binary_to_decimal([1])
+        with self.assertRaises(ValueError):
+            binary_to_decimal({1})
+        with self.assertRaises(ValueError):
+            binary_to_decimal(-7)
 
 
 if __name__ == '__main__':

@@ -71,10 +71,10 @@ def generate_password(leng: int) -> str:
 
 def decimal_to_binary(decimal: int) -> str:
     print(decimal, "-ª", isinstance(decimal, int))
-    # if decimal < 0:
-    #   raise TypeError("Is not positive")
     if not isinstance(decimal, int):
         raise TypeError("Is not a integer")
+    if decimal < 0:
+        raise ValueError("Is not positive")
     if decimal == 0:
         return "0"
     rest = []
@@ -92,15 +92,16 @@ def decimal_to_binary(decimal: int) -> str:
 
 
 def binary_to_decimal(binary: int) -> int:
-    decimal, i = 0, 0
-    while (binary != 0):
-        dec = binary % 10
-        decimal = decimal + dec * pow(2, i)
+    str_binary = str(binary)
+    for i in str_binary:
+        if i == "0" or i == "1":
+            decimal = 0
+        else:
+            raise ValueError("Is not a binary number")
+    power = 1
+    while binary > 0:
+        rem = binary % 10
         binary = binary//10
-        i += 1
+        decimal += rem*power
+        power = power*2
     return decimal
-
-
-# print("decimal", binary_to_decimal(100))
-# print("decimal", binary_to_decimal(1010))
-print("binary", decimal_to_binary(-7))
