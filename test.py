@@ -1,6 +1,6 @@
 import unittest
 
-from myfunctions import prime_number, prime_number_v0, generate_password, decimal_to_binary, binary_to_decimal
+from myfunctions import prime_number, prime_number_v0, generate_password, decimal_to_binary, binary_to_decimal, is_palindrome
 
 # 1. TEST PARA NÚMERO PRIMOS
 
@@ -100,6 +100,29 @@ class TestBinary_to_decimal(unittest.TestCase):
             binary_to_decimal({1})
         with self.assertRaises(ValueError):
             binary_to_decimal(-7)
+
+
+class TestIsPalindrome(unittest.TestCase):
+    def test_is_palindrome(self):
+        self.assertEqual(is_palindrome("Ana lleva al oso la avellana"), True)
+        self.assertEqual(is_palindrome("Ana"), True)
+        self.assertEqual(is_palindrome(" Ana "), True)
+        self.assertEqual(is_palindrome("Sara Baras "), True)
+
+    def test_otros(self):
+        self.assertEqual(is_palindrome("Hola que tal"), False)
+        self.assertEqual(is_palindrome(None), False)
+        self.assertEqual(is_palindrome(True), False)
+        self.assertEqual(is_palindrome(False), False)
+        self.assertEqual(is_palindrome(111), True)
+        self.assertEqual(is_palindrome(1101), False)
+        self.assertEqual(is_palindrome(111.3), False)
+        self.assertEqual(is_palindrome((111,)), False)
+        self.assertEqual(is_palindrome((111.3,)), False)
+        self.assertEqual(is_palindrome([111,]), False)
+        self.assertEqual(is_palindrome([111.3,]), False)
+        self.assertEqual(is_palindrome({"a": 111.3, }), False)
+        self.assertEqual(is_palindrome({"a": "a"}), False)
 
 
 if __name__ == '__main__':

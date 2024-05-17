@@ -66,7 +66,6 @@ def generate_password(leng: int) -> str:
         raise ValueError("Password length must be between 8 and 16")
 
 # 3. PASAR NÚMERO DECIMAL A BINARIO
-# contemplar el 0
 
 
 def decimal_to_binary(decimal: int) -> str:
@@ -105,3 +104,28 @@ def binary_to_decimal(binary: int) -> int:
         decimal += rem*power
         power = power*2
     return decimal
+
+
+def is_palindrome2(str_word: str) -> bool:
+    inverted_str_word = "".join(str_word.lower().split())[::-1]
+    print("-----", str_word)
+    print("-----", inverted_str_word)
+    if str_word == inverted_str_word:
+        return True
+    else:
+        return False
+
+
+def is_palindrome(str_word: str) -> bool:
+    if not isinstance(str_word, str):
+        str_word = str(str_word)
+    str_word_lower_split = str_word.lower().split()
+    str_word_join = "".join(str_word_lower_split)
+    print("str_word_join", str_word_join)
+    str_word_invert = str_word_join[::-1]
+    print("-----", str_word_join)
+    print("-----", str_word_invert)
+    if str_word_join == str_word_invert:
+        return True
+    else:
+        return False

@@ -5,7 +5,8 @@ from myfunctions import (
     prime_number,
     generate_password,
     decimal_to_binary,
-    binary_to_decimal
+    binary_to_decimal,
+    is_palindrome
 )
 
 app = FastAPI()
@@ -66,6 +67,19 @@ def get_binary_to_decimal(binary: int):
     except ValueError as e:
         return {
             "error": str(e),
+        }
+
+
+@app.get("/is_ palindorme")
+def get_is_palindrome(str_word: str):
+    try:
+        return {
+            "word": str_word,
+            "result": is_palindrome(str_word),
+        }
+    except ValueError as e:
+        return {
+            "error": str_word(e)
         }
 
 
